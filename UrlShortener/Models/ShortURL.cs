@@ -9,7 +9,6 @@
         public string URLdescription { get; set; }
         public int CreatedByUserId { get; set; }
         public DateTime CreatedDate { get; set; }
-
         public User CreatedBy { get; set; }
     }
 }
