@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using UrlShortener.Data;
 
 namespace UrlShortener.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("users")]
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
@@ -15,16 +14,32 @@ namespace UrlShortener.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpGet]   
-        public IActionResult Login()
+        [HttpGet("Get")]
+        public IActionResult GetUsers()
         {
-            return View();
+            var objGetUsers = _dbContext.Users.ToList();
+
+            return Ok(objGetUsers);
         }
 
-        [HttpPost]
-        public IActionResult Login(string username, string password)
+        [HttpGet("Get/{id}")]
+
+        public IActionResult GetUrl(int Id)
         {
-            return View();
+            if (Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+
+            var objUser = _dbContext.Users.FirstOrDefault(u => u.Id == Id);
+
+            if (objUser == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(objUser);
         }
     }
 }
+
