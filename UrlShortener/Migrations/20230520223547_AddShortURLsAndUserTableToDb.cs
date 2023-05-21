@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace UrlShortener.Migrations
 {
     /// <inheritdoc />
-    public partial class AddShortURLandUserTables : Migration
+    public partial class AddShortURLsAndUserTableToDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,6 +48,16 @@ namespace UrlShortener.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Password", "Role", "Username" },
+                values: new object[] { 1, "05val89", "Admin", "Andriy" });
+
+            migrationBuilder.InsertData(
+                table: "ShortURLs",
+                columns: new[] { "Id", "CreatedByUserId", "CreatedDate", "OriginalURL", "ShortenedURL", "URLdescription" },
+                values: new object[] { 1, 1, new DateTime(2023, 5, 21, 1, 35, 46, 938, DateTimeKind.Local).AddTicks(7287), "https://www.youtube.com/", "RT3OFD", "Youtube" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ShortURLs_CreatedByUserId",

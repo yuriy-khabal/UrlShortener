@@ -12,8 +12,8 @@ using UrlShortener.Data;
 namespace UrlShortener.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230520192524_AddShortURLandUserTables")]
-    partial class AddShortURLandUserTables
+    [Migration("20230520223547_AddShortURLsAndUserTableToDb")]
+    partial class AddShortURLsAndUserTableToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,17 @@ namespace UrlShortener.Migrations
                     b.HasIndex("CreatedByUserId");
 
                     b.ToTable("ShortURLs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedByUserId = 1,
+                            CreatedDate = new DateTime(2023, 5, 21, 1, 35, 46, 938, DateTimeKind.Local).AddTicks(7287),
+                            OriginalURL = "https://www.youtube.com/",
+                            ShortenedURL = "RT3OFD",
+                            URLdescription = "Youtube"
+                        });
                 });
 
             modelBuilder.Entity("UrlShortener.Models.User", b =>
@@ -81,6 +92,15 @@ namespace UrlShortener.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Password = "05val89",
+                            Role = "Admin",
+                            Username = "Andriy"
+                        });
                 });
 
             modelBuilder.Entity("UrlShortener.Models.ShortURL", b =>

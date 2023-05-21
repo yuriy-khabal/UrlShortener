@@ -5,13 +5,12 @@ namespace UrlShortener.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
-        public DbSet<ShortURL> ShortURLs { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         { 
             
         }
-
+        public DbSet<User> Users { get; set; }
+        public DbSet<ShortURL> ShortURLs { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
@@ -33,6 +32,18 @@ namespace UrlShortener.Data
                 .HasMany(u => u.ShortURLs)
                 .WithOne(s => s.CreatedBy)
                 .HasForeignKey(s => s.CreatedByUserId);
+
+            modelBuilder
+               .Entity<User>()
+               .HasData(
+                   new User
+                   {
+                       Id = 1,
+                       Username = "Andriy",
+                       Password = "05val89",
+                       Role = "Admin",
+                   }
+               );
 
             modelBuilder
                 .Entity<ShortURL>()
@@ -58,6 +69,20 @@ namespace UrlShortener.Data
                 .Entity<ShortURL>()
                 .Property(s => s.CreatedDate)
                 .IsRequired();
+
+            modelBuilder
+                .Entity<ShortURL>()
+                .HasData(
+                    new ShortURL
+                    {
+                        Id = 1,
+                        OriginalURL = "https://www.youtube.com/",
+                        ShortenedURL = "RT3OFD",
+                        URLdescription = "Youtube",
+                        CreatedByUserId = 1,
+                        CreatedDate = DateTime.Now
+                    }
+                );            
         }
     }
 }
