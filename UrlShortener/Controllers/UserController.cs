@@ -3,6 +3,7 @@ using UrlShortener.Data;
 using UrlShortener.Data.Repository;
 using UrlShortener.Data.Repository.IRepository;
 using UrlShortener.Entities;
+using UrlShortener.Mappers;
 using UrlShortener.Models;
 
 namespace UrlShortener.Controllers
@@ -19,7 +20,7 @@ namespace UrlShortener.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetUsers()
+        public IActionResult GetAll()
         {
             var objGetUsers = _unitOfWork.User.GetAll().ToList();
 
@@ -46,13 +47,16 @@ namespace UrlShortener.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody]User user)
+        public IActionResult Create([FromBody]UserModel userModel)
         {
-            var existingUrl = _unitOfWork.User.Get(u => u.Username == user.Username);
+            var existingUrl = _unitOfWork.User.Get(u => u.Username == userModel.Username);
             if (existingUrl != null)
             {
                 return BadRequest("User already exists.");
             }
+
+            var mapper = new UserMapper();
+            var user = mapper.MapToUser(userModel);
 
             if (!ModelState.IsValid)
             {
@@ -62,7 +66,7 @@ namespace UrlShortener.Controllers
             _unitOfWork.User.Add(user);
             _unitOfWork.Save();
 
-            return CreatedAtAction(nameof(GetUrl), new { id = user.Id }, user);
+            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
 
         [HttpDelete("{id}")]

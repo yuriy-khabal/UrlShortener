@@ -15,17 +15,17 @@ namespace UrlShortener.Controllers
     [Route("urls")]
     public class ShortURLController : Controller
     {   
-        private readonly IUnitOfWork _uniOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ShortURLController(IUnitOfWork uniOfWork)
+        public ShortURLController(IUnitOfWork unitOfWork)
         {
-            _uniOfWork = uniOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
         public IActionResult GetAllUrls()
         {
-            var objUrlsList = _uniOfWork.ShortUrl.GetAll().ToList();
+            var objUrlsList = _unitOfWork.ShortUrl.GetAll().ToList();
 
             return Ok(objUrlsList);
         }
@@ -39,7 +39,7 @@ namespace UrlShortener.Controllers
                 return NotFound();
             }
 
-            var objUrl = _uniOfWork.ShortUrl.Get(u => u.Id == Id);
+            var objUrl = _unitOfWork.ShortUrl.Get(u => u.Id == Id);
 
             if (objUrl == null)
             {
@@ -52,7 +52,7 @@ namespace UrlShortener.Controllers
         [HttpPost]
         public IActionResult Create([FromBody]ShortURLModel shortUrlModel)
         {
-            var existingUrl = _uniOfWork.ShortUrl.Get(u => u.OriginalURL == shortUrlModel.OriginalURL);
+            var existingUrl = _unitOfWork.ShortUrl.Get(u => u.OriginalURL == shortUrlModel.OriginalURL);
             if (existingUrl != null)
             {
                 return BadRequest("URL already exists.");
@@ -66,8 +66,8 @@ namespace UrlShortener.Controllers
                 return BadRequest("Invalid validation");
             }
 
-            _uniOfWork.ShortUrl.Add(shortUrl);
-            _uniOfWork.Save();
+            _unitOfWork.ShortUrl.Add(shortUrl);
+            _unitOfWork.Save();
 
             return CreatedAtAction(nameof(GetUrl), new { id = shortUrl.Id }, shortUrl);
 
@@ -76,14 +76,14 @@ namespace UrlShortener.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteUrl(int id)
         {
-            var url = _uniOfWork.ShortUrl.Get(u => u.Id == id);
+            var url = _unitOfWork.ShortUrl.Get(u => u.Id == id);
             if (url == null)
             {
                 return NotFound();
             }
 
-            _uniOfWork.ShortUrl.Remove(url);
-            _uniOfWork.Save();
+            _unitOfWork.ShortUrl.Remove(url);
+            _unitOfWork.Save();
 
             return Ok(url);
         }
