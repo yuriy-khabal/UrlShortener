@@ -20,8 +20,7 @@ namespace UrlShortener.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpGet("get")]
-
+        [HttpGet]
         public IActionResult GetAllUrls()
         {
             var objUrlsList = _dbContext.ShortURLs.ToList();
@@ -29,7 +28,7 @@ namespace UrlShortener.Controllers
             return Ok(objUrlsList);
         }
 
-        [HttpGet("get/{id}")]
+        [HttpGet("{id}")]
 
         public IActionResult GetUrl(int Id)
         {
@@ -48,23 +47,7 @@ namespace UrlShortener.Controllers
             return Ok(objUrl);
         }
 
-        [HttpGet("{shortenedUrl}")]
-
-        public IActionResult GetUrl(string shortenedUrl)
-        {
-
-            var objUrl = _dbContext.ShortURLs.FirstOrDefault(u => u.ShortenedURL == "https://localhost:7044/urls/" + shortenedUrl);
-
-            if (objUrl == null)
-            {
-                return NotFound();
-            }
-
-            return Redirect(objUrl.OriginalURL);
-        }
-
-
-        [HttpPost("create")]
+        [HttpPost]
         public IActionResult Create([FromBody]ShortURLModel shortUrlModel)
         {
             var existingUrl = _dbContext.ShortURLs.FirstOrDefault(u => u.OriginalURL == shortUrlModel.OriginalURL);
@@ -76,6 +59,11 @@ namespace UrlShortener.Controllers
             var mapper = new ShortURLMapper();
             var shortUrl = mapper.MapToShortURL(shortUrlModel);
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid validation");
+            }
+
             _dbContext.Add(shortUrl);
             _dbContext.SaveChanges();
 
@@ -83,30 +71,20 @@ namespace UrlShortener.Controllers
 
         }
 
-        [HttpDelete("remove/{id}")]
+        [HttpDelete("{id}")]
         public IActionResult DeleteUrl(int id)
         {
-            var url = _dbContext.Users.FirstOrDefault(u => u.Id == id);
+            var url = _dbContext.ShortURLs.FirstOrDefault(u => u.Id == id);
             if (url == null)
             {
                 return NotFound();
             }
 
-            _dbContext.Users.Remove(url);
+            _dbContext.ShortURLs.Remove(url);
             _dbContext.SaveChanges();
 
             return Ok(url);
         }
 
-        /*private string GenerateShortenedUrlCode()
-        {
-            // Implement your code generation logic here
-            // Example: Generate a random alphanumeric string
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var random = new Random();
-            string code = new string(Enumerable.Repeat(chars, 6)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-            return code;
-        }*/
     }
 }

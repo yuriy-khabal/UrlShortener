@@ -41,7 +41,7 @@ namespace UrlShortener.Data
                        Id = 1,
                        Username = "Andriy",
                        Password = "05val89",
-                       Role = "Admin",
+                       Role = "Admin"
                    }
                );
 

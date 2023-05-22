@@ -8,9 +8,10 @@ namespace UrlShortener.Mappers
         public  ShortURL MapToShortURL(ShortURLModel model)
         {
             var shortURL = new ShortURL
-            {
+            {   
+                Id = model.Id,
                 OriginalURL = model.OriginalURL,
-                ShortenedURL = "https://localhost:7044/urls/" + new ShortUrlService().GenerateShortenedUrl(model.OriginalURL),
+                ShortenedURL = "https://localhost:7044/redirect/" + new ShortUrlService().GenerateShortenedUrl(model.OriginalURL),
                 URLdescription = model.URLdescription,
                 CreatedByUserId = model.CreatedByUserId,
                 CreatedDate = DateTime.Now,              
@@ -23,7 +24,7 @@ namespace UrlShortener.Mappers
         {
             var shortURLModel = new ShortURLModel
             {
-                OriginalURL = model.OriginalURL,            
+                OriginalURL = model.OriginalURL,              
                 URLdescription = model.URLdescription,
                 CreatedByUserId = model.CreatedByUserId,
             };

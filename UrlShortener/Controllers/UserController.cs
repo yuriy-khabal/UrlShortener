@@ -14,7 +14,7 @@ namespace UrlShortener.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpGet("Get")]
+        [HttpGet]
         public IActionResult GetUsers()
         {
             var objGetUsers = _dbContext.Users.ToList();
@@ -22,9 +22,9 @@ namespace UrlShortener.Controllers
             return Ok(objGetUsers);
         }
 
-        [HttpGet("Get/{id}")]
+        [HttpGet("{id}")]
 
-        public IActionResult GetUrl(int Id)
+        public IActionResult GetUser(int Id)
         {
             if (Id == null || Id == 0)
             {
