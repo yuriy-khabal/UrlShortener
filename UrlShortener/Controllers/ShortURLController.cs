@@ -5,7 +5,9 @@ using System.Reflection.PortableExecutable;
 using UrlShortener.Data;
 using UrlShortener.Mappers;
 using UrlShortener.Models;
+using UrlShortener.Entities;
 using UrlShortener.Services;
+using UrlShortener.Data.Repository.IRepository;
 
 namespace UrlShortener.Controllers
 {
@@ -13,17 +15,17 @@ namespace UrlShortener.Controllers
     [Route("urls")]
     public class ShortURLController : Controller
     {   
-        private readonly ApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _uniOfWork;
 
-        public ShortURLController(ApplicationDbContext dbContext)
+        public ShortURLController(IUnitOfWork uniOfWork)
         {
-            _dbContext = dbContext;
+            _uniOfWork = uniOfWork;
         }
 
         [HttpGet]
         public IActionResult GetAllUrls()
         {
-            var objUrlsList = _dbContext.ShortURLs.ToList();
+            var objUrlsList = _uniOfWork.ShortUrl.GetAll().ToList();
 
             return Ok(objUrlsList);
         }
@@ -37,7 +39,7 @@ namespace UrlShortener.Controllers
                 return NotFound();
             }
 
-            var objUrl = _dbContext.ShortURLs.FirstOrDefault(u => u.Id == Id);
+            var objUrl = _uniOfWork.ShortUrl.Get(u => u.Id == Id);
 
             if (objUrl == null)
             {
@@ -50,7 +52,7 @@ namespace UrlShortener.Controllers
         [HttpPost]
         public IActionResult Create([FromBody]ShortURLModel shortUrlModel)
         {
-            var existingUrl = _dbContext.ShortURLs.FirstOrDefault(u => u.OriginalURL == shortUrlModel.OriginalURL);
+            var existingUrl = _uniOfWork.ShortUrl.Get(u => u.OriginalURL == shortUrlModel.OriginalURL);
             if (existingUrl != null)
             {
                 return BadRequest("URL already exists.");
@@ -64,8 +66,8 @@ namespace UrlShortener.Controllers
                 return BadRequest("Invalid validation");
             }
 
-            _dbContext.Add(shortUrl);
-            _dbContext.SaveChanges();
+            _uniOfWork.ShortUrl.Add(shortUrl);
+            _uniOfWork.Save();
 
             return CreatedAtAction(nameof(GetUrl), new { id = shortUrl.Id }, shortUrl);
 
@@ -74,14 +76,14 @@ namespace UrlShortener.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteUrl(int id)
         {
-            var url = _dbContext.ShortURLs.FirstOrDefault(u => u.Id == id);
+            var url = _uniOfWork.ShortUrl.Get(u => u.Id == id);
             if (url == null)
             {
                 return NotFound();
             }
 
-            _dbContext.ShortURLs.Remove(url);
-            _dbContext.SaveChanges();
+            _uniOfWork.ShortUrl.Remove(url);
+            _uniOfWork.Save();
 
             return Ok(url);
         }

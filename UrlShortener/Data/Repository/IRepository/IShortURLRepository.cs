@@ -1,9 +1,9 @@
-﻿using UrlShortener.Models;
+﻿using UrlShortener.Entities;
 
 namespace UrlShortener.Data.Repository.IRepository
 {
-    public interface IShortURLRepository : IRepository<ShortURLModel>
+    public interface IShortURLRepository : IRepository<ShortURL>
     {
-        void Update(ShortURLModel shortURL);
+        void Update(ShortURL shortURL);
     }
 }

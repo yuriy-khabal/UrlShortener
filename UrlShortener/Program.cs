@@ -1,12 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using UrlShortener.Data;
+using UrlShortener.Data.Repository;
+using UrlShortener.Data.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var corsPolicy = "AllowOrigin";
 //TODO CORS enabled for any origin as simplification for on the development phase and should be changed before deployment to production environment

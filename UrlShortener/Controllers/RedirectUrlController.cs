@@ -9,6 +9,7 @@ namespace UrlShortener.Controllers
     public class RedirectUrlController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
+
         public RedirectUrlController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;

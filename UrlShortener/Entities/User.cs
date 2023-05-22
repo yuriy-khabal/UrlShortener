@@ -1,6 +1,6 @@
 ﻿
 
-namespace UrlShortener.Models
+namespace UrlShortener.Entities
 {
     public class User
     {

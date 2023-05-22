@@ -1,4 +1,5 @@
 ﻿using UrlShortener.Models;
+using UrlShortener.Entities;
 using UrlShortener.Services;
 
 namespace UrlShortener.Mappers
@@ -9,7 +10,6 @@ namespace UrlShortener.Mappers
         {
             var shortURL = new ShortURL
             {   
-                Id = model.Id,
                 OriginalURL = model.OriginalURL,
                 ShortenedURL = "https://localhost:7044/redirect/" + new ShortUrlService().GenerateShortenedUrl(model.OriginalURL),
                 URLdescription = model.URLdescription,
