@@ -41,8 +41,8 @@ const CustomTable = () => {
                 </a>
               </td>
               <td style={tableCellStyle}>
-                <a href={row.shortenedURL} target="_blank" rel="noopener noreferrer">
-                  {row.shortenedURL}
+                <a href={row.shortenedUrl} target="_blank" rel="noopener noreferrer">
+                  {row.shortenedUrl}
                 </a>
               </td>
               <td style={tableCellStyle}>{row.urLdescription}</td>

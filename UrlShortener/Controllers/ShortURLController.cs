@@ -27,7 +27,17 @@ namespace UrlShortener.Controllers
         {
             var objUrlsList = _unitOfWork.ShortUrl.GetAll().ToList();
 
-            return Ok(objUrlsList);
+            var mapper = new ShortURLMapper();
+
+
+            List<ShortURLGetModel> shortURLModels = new List<ShortURLGetModel>();
+
+            foreach (var el in objUrlsList)
+            {
+                shortURLModels.Add(mapper.MapToShortURLModel(el));
+            }
+
+            return Ok(shortURLModels);
         }
 
         [HttpGet("{id}")]

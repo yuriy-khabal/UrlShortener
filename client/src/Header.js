@@ -1,17 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <nav className="navbar">
       <ul className="navbar-nav" style={navbarStyle}>
         <li className="nav-item">
-          <a href="/about-url" className="nav-link" style={navLinkStyle}>About Url</a>
+          <Link to="/about-url" className="nav-link" style={navLinkStyle}>About Url Shortener</Link>
         </li>
         <li className="nav-item">
-          <a href="/url-shortened-table" className="nav-link" style={navLinkStyle}>Url Shortened Table</a>
+          <Link to="/url-shortened-table" className="nav-link" style={navLinkStyle}>Url Shortened Table</Link>
         </li>
         <li className="nav-item" style={{ marginLeft: 'auto' }}>
-          <a href="/login" className="nav-link" style={navLinkStyle}>Login</a>
+          <Link to="/login" className="nav-link" style={navLinkStyle}>Login</Link>
         </li>
       </ul>
     </nav>

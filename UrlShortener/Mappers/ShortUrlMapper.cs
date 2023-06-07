@@ -20,16 +20,19 @@ namespace UrlShortener.Mappers
             return shortURL;
         }
 
-        public ShortURLModel MapToShortURLModel(ShortURL model)
+        public ShortURLGetModel MapToShortURLModel(ShortURL model)
         {
-            var shortURLModel = new ShortURLModel
-            {
-                OriginalURL = model.OriginalURL,              
+            var shortURLGetModel = new ShortURLGetModel
+            {           
+                Id = model.Id,
+                OriginalURL = model.OriginalURL,
+                ShortenedUrl = model.ShortenedURL,
                 URLdescription = model.URLdescription,
                 CreatedByUserId = model.CreatedByUserId,
+                CreatedDate = DateTime.Now
             };
 
-            return shortURLModel;
+            return shortURLGetModel;
         }
 
     }
