@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const CustomTable = () => {
   const [data, setData] = useState([]);
@@ -20,6 +21,7 @@ const CustomTable = () => {
   return (
     <div style={containerStyle}>
       <h2 style={headerStyle}>UrlShortened Table</h2>
+      <Link to="/add-url" style={addUrlButtonStyle}>Add Url</Link>
       <table style={tableStyle}>
         <thead>
           <tr>
@@ -57,7 +59,7 @@ const CustomTable = () => {
 };
 
 const containerStyle = {
-  background: `#E6E6FA`, 
+  background: `#E6E6FA`,
   backgroundSize: 'cover',
   minHeight: '100vh',
   padding: '20px',
@@ -87,7 +89,23 @@ const tableHeaderStyle = {
 const tableCellStyle = {
   padding: '10px',
   borderBottom: '1px solid #ddd',
-  fontSize: '14px'
+  fontSize: '14px',
+};
+
+const addUrlButtonStyle = {
+  display: 'block',
+  width: '120px',
+  margin: '20px auto',
+  backgroundColor: '#4CAF50',
+  color: 'white',
+  padding: '10px 20px',
+  border: 'none',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  fontSize: '16px',
+  fontFamily: 'Arial, sans-serif',
+  textDecoration: 'none',
+  textAlign: 'center',
 };
 
 export default CustomTable;

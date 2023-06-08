@@ -6,6 +6,7 @@ import Login from './Login';
 import AboutUrlPage from './AboutUrlPage';
 import HomePage from './HomePage';
 import Footer from './Footer';
+import AddUrl from './AddUrl';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/url-shortened-table" element={<UrlsTable />} />
           <Route path="/about-url" element={<AboutUrlPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/add-url" element={<AddUrl />} />
         </Routes>
         <Footer />
       </div>
