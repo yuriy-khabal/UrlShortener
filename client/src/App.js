@@ -4,6 +4,8 @@ import Header from './Header';
 import UrlsTable from './UrlsTable';
 import Login from './Login';
 import AboutUrlPage from './AboutUrlPage';
+import HomePage from './HomePage';
+import Footer from './Footer';
 
 const App = () => {
   return (
@@ -11,10 +13,12 @@ const App = () => {
       <div style={appStyle}>
         <Header />
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route path="/url-shortened-table" element={<UrlsTable />} />
           <Route path="/about-url" element={<AboutUrlPage />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

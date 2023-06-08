@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from './img/UrlLogo.webp'
 
 const Header = () => {
   return (
     <nav className="navbar">
       <ul className="navbar-nav" style={navbarStyle}>
+        <Link to='/' style={logoLinkStyle}>
+          <img src={logo} alt="About Url" style={imageStyle} />
+        </Link>
         <li className="nav-item">
           <Link to="/about-url" className="nav-link" style={navLinkStyle}>About Url Shortener</Link>
         </li>
@@ -21,7 +25,7 @@ const Header = () => {
 
 const navbarStyle = {
   display: 'flex',
-  justifyContent: 'space-between',
+  justifyContent: 'space-around',
   alignItems: 'center',
   backgroundColor: '#333',
   padding: '10px',
@@ -29,10 +33,24 @@ const navbarStyle = {
   listStyleType: 'none',
 };
 
+const logoLinkStyle = {
+  display: 'flex',
+  alignItems: 'center',
+};
+
 const navLinkStyle = {
   color: '#fff',
   textDecoration: 'none',
-  marginRight: '40px', // Зменшено відстань між елементами
+  fontSize: '22px',
+  marginLeft: '20px',
+  marginRight: '20px',
+  fontSize: '20px',
+};
+
+const imageStyle = {
+  maxWidth: '70px', 
+  height: 'auto',
+  marginRight: '10px',
 };
 
 export default Header;
