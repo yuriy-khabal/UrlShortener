@@ -20,8 +20,8 @@ const Login = () => {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginTop: '90px',
-    marginBottom: '160px',
+    marginTop: '150px',
+    marginBottom: '260px',
     fontFamily: 'Arial, sans-serif',
     fontSize: '18px',
   };

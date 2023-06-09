@@ -25,6 +25,14 @@ const AboutUrl = () => {
         Whether you need to share links on social media, send them via email, or use them in any other way,
         Url Shortener makes it quick and easy.
       </p>
+      <p style={descriptionStyle}>
+        A URL shortener, also known as a link shortener, seems like a simple tool, but it is a service that can have a dramatic impact on your marketing efforts.
+        Link shorteners work by transforming any long URL into a shorter, more readable link. When a user clicks the shortened version, they’re automatically forwarded to the destination URL.
+      </p>
+      <p style={descriptionStyle}>
+        Think of a short URL as a more descriptive and memorable nickname for your long webpage address. You can, for example, use a short URL like bit.ly/CelebrateBitly so people will have a good idea about where your link will lead before they click it.
+        If you’re contributing content to the online world, you need a URL shortener.
+      </p>
     </div>
   );
 };
@@ -32,9 +40,10 @@ const AboutUrl = () => {
 const containerStyle = {
   background: '#E6E6FA',
   padding: '20px',
-  maxWidth: '1300px',
+  maxWidth: '1400px',
   margin: '40px auto',
   fontFamily: 'Roboto, sans-serif',
+  marginBottom: '40px',
 };
 
 const headerStyle = {

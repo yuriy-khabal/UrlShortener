@@ -20,17 +20,17 @@ const CustomTable = () => {
 
   return (
     <div style={containerStyle}>
-      <h2 style={headerStyle}>UrlShortened Table</h2>
+      <h2 style={headerStyle}>Url Shortened Table</h2>
       <Link to="/add-url" style={addUrlButtonStyle}>Add Url</Link>
       <table style={tableStyle}>
         <thead>
           <tr>
             <th style={tableHeaderStyle}>ID</th>
-            <th style={tableHeaderStyle}>OriginalURL</th>
-            <th style={tableHeaderStyle}>ShortenedURL</th>
-            <th style={tableHeaderStyle}>URLDescription</th>
-            <th style={tableHeaderStyle}>CreatedByUserId</th>
-            <th style={tableHeaderStyle}>CreatedDate</th>
+            <th style={tableHeaderStyle}>Original URL</th>
+            <th style={tableHeaderStyle}>Shortened URL</th>
+            <th style={tableHeaderStyle}>URL Description</th>
+            <th style={tableHeaderStyle}>Created By User ID</th>
+            <th style={tableHeaderStyle}>Created Date</th>
           </tr>
         </thead>
         <tbody>
@@ -59,44 +59,49 @@ const CustomTable = () => {
 };
 
 const containerStyle = {
-  background: `#E6E6FA`,
-  backgroundSize: 'cover',
-  minHeight: '100vh',
+  background: '#E6E6FA',
   padding: '20px',
+  minHeight: '100vh',
 };
 
 const headerStyle = {
   textAlign: 'center',
-  color: '#fff',
+  color: '#333',
   margin: '0px 0px 20px',
 };
 
 const tableStyle = {
   width: '100%',
   borderCollapse: 'collapse',
-  background: '#fff',
-  boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
-  borderRadius: '5px',
+  background: 'linear-gradient(to bottom right, #f5f7fb, #c3cfe2)',
+  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+  borderRadius: '26px',
+  overflow: 'hidden',
 };
 
 const tableHeaderStyle = {
-  padding: '10px',
+  padding: '12px 16px',
   textAlign: 'left',
   fontWeight: 'bold',
-  border: '1px solid #ddd',
+  border: 'none',
+  background: 'linear-gradient(to bottom right, #7883a8, #61678b)',
+  color: '#fff',
+  textTransform: 'uppercase',
+  fontSize: '14px',
 };
 
 const tableCellStyle = {
-  padding: '10px',
+  padding: '12px 16px',
   borderBottom: '1px solid #ddd',
   fontSize: '14px',
+  wordWrap: 'break-word',
 };
 
 const addUrlButtonStyle = {
   display: 'block',
   width: '120px',
   margin: '20px auto',
-  backgroundColor: '#4CAF50',
+  backgroundColor: '#333333',
   color: 'white',
   padding: '10px 20px',
   border: 'none',
