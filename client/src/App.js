@@ -7,6 +7,7 @@ import AboutUrlPage from './AboutUrlPage';
 import HomePage from './HomePage';
 import Footer from './Footer';
 import AddUrl from './AddUrl';
+import Register from './Register';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/about-url" element={<AboutUrlPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/add-url" element={<AddUrl />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
         <Footer />
       </div>
@@ -27,7 +29,7 @@ const App = () => {
 };
 
 const appStyle = {
-  backgroundColor: '#E6E6FA',
+  background: 'linear-gradient(to bottom right, #E0E5FF, #FFE6E6)', 
   minHeight: '100vh',
 };
 

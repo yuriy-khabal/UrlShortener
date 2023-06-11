@@ -39,6 +39,7 @@ const AboutUrl = () => {
 
 const containerStyle = {
   background: '#E6E6FA',
+  borderRadius: '34px',
   padding: '20px',
   maxWidth: '1400px',
   margin: '40px auto',

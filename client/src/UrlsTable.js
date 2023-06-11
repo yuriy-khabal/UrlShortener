@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const CustomTable = () => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -10,14 +11,37 @@ const CustomTable = () => {
         const response = await fetch('https://localhost:7044/urls/');
         const jsonData = await response.json();
         setData(jsonData);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
+  if (isLoading) {
+    return (
+      <div style={containerStyle}>
+      <h2 style={headerStyle}>Url Shortened Table</h2>
+      <table style={tableStyle}>
+        <thead>
+          <tr>
+            <th style={tableHeaderStyle}>ID</th>
+            <th style={tableHeaderStyle}>Original URL</th>
+            <th style={tableHeaderStyle}>Shortened URL</th>
+            <th style={tableHeaderStyle}>URL Description</th>
+            <th style={tableHeaderStyle}>Created By User ID</th>
+            <th style={tableHeaderStyle}>Created Date</th>
+          </tr>
+        </thead>
+      </table>
+        <div style={loadingStyle}>Loading...</div>
+      </div>
+    );
+  }
+  
   return (
     <div style={containerStyle}>
       <h2 style={headerStyle}>Url Shortened Table</h2>
@@ -59,9 +83,8 @@ const CustomTable = () => {
 };
 
 const containerStyle = {
-  background: '#E6E6FA',
   padding: '20px',
-  minHeight: '100vh',
+  marginBottom: '110px',
 };
 
 const headerStyle = {
@@ -112,5 +135,16 @@ const addUrlButtonStyle = {
   textDecoration: 'none',
   textAlign: 'center',
 };
+
+const loadingStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100px',
+  fontSize: '80px',
+  fontWeight: 'bold',
+  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
+  margin: '150px 100px 200px 100px',
+}
 
 export default CustomTable;

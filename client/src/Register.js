@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import urlShortener from './img/UrlShortener.png'
 
-const Login = () => {
+const Register = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [agreed, setAgreed] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -13,8 +14,12 @@ const Login = () => {
     if (username === 'admin' && password === 'password') {
       navigate('/url-shortened-table');
     } else {
-      window.alert('Невірні дані входу');
+      window.alert('Invalid login data');
     }
+  };
+
+  const handleAgreementChange = (e) => {
+    setAgreed(e.target.checked);
   };
 
   const containerStyle = {
@@ -55,7 +60,7 @@ const Login = () => {
 
   const buttonStyle = {
     backgroundColor: '#4CAF50',
-    marginBottom: '80px',
+    marginBottom: '24px',
     color: 'white',
     padding: '12px 24px',
     border: 'none',
@@ -65,8 +70,14 @@ const Login = () => {
     fontFamily: 'Arial, sans-serif',
   };
 
-  const registerStyle = {
-    margin: '0px 0px 20px 22px',
+  const agreementStyle = {   
+    margin: '5px 0px 28px 0px',
+    fontFamily: 'Segoe UI Webfont, sans-serif',
+    wordWrap: 'break-word',
+  }
+
+  const registerStyle = {   
+    margin: '10px 0px 80px 0px',
     fontFamily: 'Segoe UI Webfont, sans-serif',
   }
 
@@ -85,12 +96,23 @@ const Login = () => {
     height: 'auto',
   };
 
+  const checkBoxStyle = {
+    marginRight: '12px',
+    transform: 'scale(1.5)',
+    backgroundColor: 'transparent',
+  }
+
+  const checkedCheckBoxStyle = {
+    ...checkBoxStyle,
+    backgroundColor: '#0067B8',
+  };
+
   return (
     <div style={containerStyle}>
       <div style={imageContainerStyle}>
         <img src={urlShortener} alt="Url Shortener" style={imageStyle} />
       </div>
-      <h2 style={headerStyle}>Login</h2>
+      <h2 style={headerStyle}>Register</h2>
       <form onSubmit={handleLogin} style={formStyle}>
         <div style={formGroupStyle}>
           <input
@@ -112,14 +134,35 @@ const Login = () => {
             style={inputStyle}
           />
         </div>
-        <div style={registerStyle}>
-            Don't have an Url Shortener account?
-            <Link to='/register' style={redirectStyle}>Signing up!</Link>
+        <div style={formGroupStyle}>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder='Confirm password'
+            style={inputStyle}
+          />
         </div>
-        <button type="submit" style={buttonStyle}>Login</button>
+        <div style={agreementStyle}>
+          <label>
+            <input
+              type="checkbox"
+              checked={agreed}
+              onChange={handleAgreementChange}
+              style={agreed ? checkedCheckBoxStyle : checkBoxStyle}
+            />
+            I agree to the Url Shortener Terms of Use and acknowledge the Privacy Statement.
+          </label>
+        </div>      
+        <button type="submit" style={buttonStyle}>Register</button>
+        <div style={registerStyle}>
+            Already have an UrlShortener account?
+            <Link to='/login' style={redirectStyle}>Sign In!</Link>
+        </div>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;

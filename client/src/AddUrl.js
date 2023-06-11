@@ -26,7 +26,6 @@ const AddUrl = () => {
       });
 
       if (response.ok) {
-        //console.alert('URL added successfully');
         navigate('/url-shortened-table');
       } else {
         window.alert('Failed to add URL');
@@ -80,16 +79,21 @@ const AddUrl = () => {
 };
 
 const containerStyle = {
-  background: `#E6E6FA`,
-  backgroundSize: 'cover',
-  minHeight: '100vh',
-  padding: '20px',
+  background: 'linear-gradient(to bottom right, rgba(230, 230, 250, 0.5), rgba(255, 247, 248, 0.5))',
+  boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+  borderRadius: '36px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  margin: '160px 400px',
+  fontFamily: 'Arial, sans-serif',
+  fontSize: '18px',
 };
 
 const headerStyle = {
+  fontFamily: 'Georgia, serif',
   textAlign: 'center',
-  color: '#fff',
-  margin: '0px 0px 20px',
+  margin: '80px 0px 20px',
 };
 
 const formStyle = {
@@ -124,6 +128,7 @@ const buttonStyle = {
   cursor: 'pointer',
   fontSize: '16px',
   fontFamily: 'Arial, sans-serif',
+  margin: '20px 0px 80px',
 };
 
 export default AddUrl;
